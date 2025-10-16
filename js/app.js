@@ -16,7 +16,7 @@ if (document.querySelector(".splash-screen")) {
 
     // Skift til location.html efter 3.5 sekunder
     setTimeout(() => {
-      window.location.href = "./sites/location.html";
+      window.location.href = "sites/location.html";
     }, 3500);
   });
 }
