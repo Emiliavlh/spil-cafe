@@ -40,6 +40,7 @@
 /* Card in general */
 /* Card */
 .game-card {
+  width: 100%; 
   display: flex;
   flex-direction: column;
   position: relative;
@@ -47,7 +48,6 @@
   background: var(--card-background-color);
   box-shadow: var(--shadow);
   z-index: 1;
-  width: 220px;
 }
 
 /* Tags */
@@ -128,6 +128,9 @@
   background: var(--card-background-color);
   box-shadow: var(--shadow);
   z-index: 20;
+  position: absolute;
+  bottom: 135px;
+  left: 0;
 }
 
 .difficulty p {
@@ -171,10 +174,12 @@
   padding: 4px 10px;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  z-index: 2;
+  z-index: 20;
   font-weight: bold;
   text-transform: capitalize;
 }
+
+
 
 .card-titel {
   display: flex;
@@ -217,12 +222,13 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-image: url("/img/forsidebaggrund.jpg");
   background-size: cover;
   background-position:center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   opacity: 0.2;
   z-index: -1;
   pointer-events: none;
@@ -363,7 +369,7 @@ footer {
   background: none;
   border: none;
   cursor: pointer;
-  color: b;
+  color: black;
 }
 
 .search-btn {
@@ -395,6 +401,9 @@ footer {
 .main-content {
   padding-top: 180px;
   padding-bottom: 80px;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .dropbtn {
@@ -431,35 +440,35 @@ main {
 
 /* --- SEKTIONER --- */
 .location-section {
-  margin-bottom: 60px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 16px;
+  flex-direction: column;
+  gap: 6px
+  
 }
 
-.location-section h2 {
+.location-header {
   font-family: var(--header-font-family);
   font-size: 28px;
   font-weight: 700;
   color: #000;
   margin-bottom: 16px;
+  flex-direction: row
 }
 
-/* "Se mere" knap */
-.see-more {
-  display: inline-block;
-  margin-top: 12px;
-  border: none;
-  font-family: var(--header-font-family);
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: background 0.2s ease;
-}
+
 
 /* --- ALLE SPIL (grid) --- */
 .game-list-all {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
   justify-items: stretch;
   align-items: start;
 }
@@ -475,11 +484,30 @@ main {
 }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 768px) {
+
+/*@media (max-width: 768px) {
   main {
     margin: 20px;
     padding: 20px;
+  }*/
+
+  @media screen and (max-width: 768px) {
+  .game-list-all {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    gap: 16px;
+    padding: 12px;
   }
+
+  .top-card {
+    height: 140px; /* Slightly smaller images on mobile */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .game-list-all {
+    padding: 8px;
+  }
+}
 
   .location-section h2 {
     font-size: 22px;
@@ -491,10 +519,10 @@ main {
 
   .game-list-all {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     row-gap: 16px;
   }
-}
+
 
 /* =====================
    SPIL GRID & CARDS
@@ -547,6 +575,9 @@ main {
   flex-direction: column;
 }
 
+.modal{
+  margin-top: 100px;
+}
 
 .dialog-details h2 {
   font-size: 2rem;
@@ -584,16 +615,16 @@ main {
 
 /* Difficulty colors */
 .difficulty-easy {
-  background-color: #4CAF50;  /* Green */
+  background-color: #4CAF50; 
 }
 
 .difficulty-medium {
-  background-color: #FFC107;  /* Yellow */
-  color: #333 !important;     /* Darker text for better contrast on yellow */
+  background-color: #FFC107;  
+  color: #333 !important;     
 }
 
 .difficulty-hard {
-  background-color: #F44336;  /* Red */
+  background-color:#F44336; 
 }
 
 footer {

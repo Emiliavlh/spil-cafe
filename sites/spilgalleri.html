@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en da">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +15,8 @@
     <header class="navbar">
       <button class="back-btn">←</button>
       <h1 class="spilgalleri-titel">Spilgalleri</h1>
-      <button class="search-btn"><input type="text" placeholder="SØG...">🔍</button>
+    <div class="filter-group search-group">
+    <input type="text" id="search-input" placeholder="🔍 Søg efter spil..." />
     </header>
     
     <section class="filter-bar">  
@@ -33,11 +34,11 @@
       <label for="age-select"></label>
       <select id="age-select">
         <option value="all">Alder</option>
-        <option value="6+">6+</option>
-        <option value="7+">7+</option>
-        <option value="8+">8+</option>
-        <option value="10+">10+</option>
-        <option value="18+">18+</option>
+        <option value="6">6+</option>
+        <option value="7">7+</option>
+        <option value="8">8+</option>
+        <option value="10">10+</option>
+        <option value="18">18+</option>
       </select>
     </div>
 
@@ -47,7 +48,7 @@
       <option value="all">Genrer</option>
       <option value="Party">Party</option>
       <option value="Mysterie">Mysterie</option>
-      <option value="Børne-/Familie">Børne-/Familie</option>
+      <option value="Familie">Børne-/Familie</option>
       <option value="Deck-builder">Deck-builder</option>
       <option value="Quiz">Quiz</option>
       <option value="Terning">Terning</option>
@@ -64,46 +65,31 @@
       <label for="playtime-select"></label>
       <select id="playtime-select">
         <option value="all">Spilletid</option>
-        <option value="15+">15+ min</option>
-        <option value="20+">20+ min</option>
-        <option value="30+">30+ min</option>
-        <option value="35+">35+ min</option>
-        <option value="40+">40+ min</option>
-        <option value="45+">45+ min</option>
-        <option value="60+">60+ min</option>
-        <option value="75+">75+ min</option>
-        <option value="120+">120+ min</option>
+        <option value="15">15+ min</option>
+        <option value="20">20+ min</option>
+        <option value="30">30+ min</option>
+        <option value="35">35+ min</option>
+        <option value="40">40+ min</option>
+        <option value="45">45+ min</option>
+        <option value="60">60+ min</option>
+        <option value="75">75+ min</option>
+        <option value="120">120+ min</option>
       </select>
     </div>
     </div>
     </section>
 
     <main class="main-content">
-
       <!--Vestergade spil sektion-->
       <section class="location-section">
-        <h2>Vestergade</h2>
-        <section id="game-list-vestergade" class="game-list-vestergade">
-        </section>
+          <h2 class="location-header">Alle Spil</h2>
           <!-- Spilcards bliver indsat her via JS -->
-
-          <button class="see-more">Se mere →</button>
-        </div>
+      
       </section>
-
+        
       <!--Alle spil sektion-->
 
-  <section class="l-section">
-        <h2>Alle Spil</h2>
-        <section id="game-list-all" class="game-list-all"></section>
-      <!--Sværhedsgrad-->
-      <section class="top-card">
-        <img src="..." alt="..." class="game-image" />
-        <div class="age-tag">6+</div>
-        <div class="rating-tag">9.1</div>
-        <div class="difficulty-tag">Svær</div>
-      </section>
-
+    <section class="game-list-all"></section>
     </main>
 
     <!-- Footer -->
@@ -118,6 +104,7 @@
         <div id="dialog-content"></div>
       </form>
     </dialog>
+  
 
     <script src="../js/app.js"></script>
   </body>
