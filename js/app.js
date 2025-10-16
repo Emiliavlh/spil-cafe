@@ -46,7 +46,7 @@ if (document.querySelector(".spilgalleri-titel")) {
 const backBtn = document.querySelector(".back-btn");
 if (backBtn) {
   backBtn.addEventListener("click", () => {
-    window.location.href = "sites/location.html";
+    window.location.href = "../sites/location.html";
   });
 }
 
@@ -139,7 +139,6 @@ function showGameDetails(game) {
   `);
 }
 
-
 //Game Card Dialog
 function getDifficultyClass(difficulty) {
   switch (difficulty.toLowerCase()) {
@@ -199,7 +198,9 @@ document.addEventListener("DOMContentLoaded", getGames);
 
 // værdier fra input felter
 function filterGames() {
-  const searchValue = document.querySelector("#search-input").value.toLowerCase(); 
+  const searchValue = document
+    .querySelector("#search-input")
+    .value.toLowerCase();
   const difficultyValue = document.querySelector("#difficulty-select").value;
   const ageValue = document.querySelector("#age-select").value;
   const genreValue = document.querySelector("#genre-select").value;
@@ -211,7 +212,7 @@ function filterGames() {
   // filtrer på spil titel
   if (searchValue) {
     // Kun filtrer hvis der er indtastet noget
-    filteredGames = filteredGames.filter(game => {
+    filteredGames = filteredGames.filter((game) => {
       // includes() checker om søgeteksten findes i titlen
       return game.title.toLowerCase().includes(searchValue);
     });
@@ -220,7 +221,7 @@ function filterGames() {
   // filtrer på valgt sværhedsgrad
   if (difficultyValue !== "all") {
     // Kun filtrer hvis ikke "all" er valgt
-    filteredGames = filteredGames.filter(game => {
+    filteredGames = filteredGames.filter((game) => {
       // Eksakt match på sværhedsgrad
       return game.difficulty === difficultyValue;
     });
@@ -230,7 +231,7 @@ function filterGames() {
   if (ageValue !== "all") {
     // Kun filtrer hvis ikke "all" er valgt
     const filterAge = Number(ageValue) || 0;
-    filteredGames = filteredGames.filter(game => {
+    filteredGames = filteredGames.filter((game) => {
       // Check om spillets alder er mindre eller lig filterens alder
       return game.age <= filterAge;
     });
@@ -239,7 +240,7 @@ function filterGames() {
   // filtrer på valgt genre
   if (genreValue !== "all") {
     // Kun filtrer hvis ikke "all" er valgt
-    filteredGames = filteredGames.filter(game => {
+    filteredGames = filteredGames.filter((game) => {
       // Eksakt match på genre
       return game.genre === genreValue;
     });
@@ -249,7 +250,7 @@ function filterGames() {
   if (playtimeValue !== "all") {
     // Kun filtrer hvis ikke "all" er valgt
     const filterTime = Number(playtimeValue) || 0;
-    filteredGames = filteredGames.filter(game => {
+    filteredGames = filteredGames.filter((game) => {
       // Check om spillets spilletid er større eller lig filterens tid
       return game.playtime >= filterTime;
     });
@@ -264,34 +265,38 @@ document.addEventListener("DOMContentLoaded", () => {
   getGames();
 
   // Event listener til søgning
-  document.querySelector("#search-input").addEventListener("input", filterGames);
-  
+  document
+    .querySelector("#search-input")
+    .addEventListener("input", filterGames);
+
   // Event listeners til alle filter-dropdowns
-  document.querySelector("#difficulty-select").addEventListener("change", filterGames);
+  document
+    .querySelector("#difficulty-select")
+    .addEventListener("change", filterGames);
   document.querySelector("#age-select").addEventListener("change", filterGames);
-  document.querySelector("#genre-select").addEventListener("change", filterGames);
-  document.querySelector("#playtime-select").addEventListener("change", filterGames);
+  document
+    .querySelector("#genre-select")
+    .addEventListener("change", filterGames);
+  document
+    .querySelector("#playtime-select")
+    .addEventListener("change", filterGames);
 });
-
-
-
-
 
 //Vestergade spilgalleri
 function showVestergadeGames() {
   if (!allGames || allGames.length === 0) {
     return getGames().then(() => {
       showVestergadeGames();
-      const filtered = allGames.filter(g =>
-        g.location && g.location.toLowerCase().trim() === "verstergade" 
+      const filtered = allGames.filter(
+        (g) => g.location && g.location.toLowerCase().trim() === "verstergade"
       );
       displayGames(filtered);
       return filtered;
-    })
+    });
   }
 
-  const filtered = allGames.filter(g =>
-    g.location && g.location.toLowerCase().trim() === "verstergade"
+  const filtered = allGames.filter(
+    (g) => g.location && g.location.toLowerCase().trim() === "verstergade"
   );
   displayGames(filtered);
   return Promise.resolve(filtered);
