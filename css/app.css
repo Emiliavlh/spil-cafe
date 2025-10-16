@@ -31,6 +31,7 @@
   --transition: 250ms ease;
 }
 
+
 .spilgalleri-titel {
   font-family: var(--header-font-family);
   font-size: var(--spilgalleri-titel-fontsize);
@@ -39,14 +40,14 @@
 /* Card in general */
 /* Card */
 .game-card {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  position: relative;
   border-radius: 16px;
   background: var(--card-background-color);
   box-shadow: var(--shadow);
-  z-index: 100;
-  width: 160px;
+  z-index: 1;
+  width: 220px;
 }
 
 /* Tags */
@@ -72,9 +73,11 @@
 
 /* Øvre card */
 .top-card {
+  position: relative;
   width: 100%;
   height: 160px;
   border-radius: 16px 16px 0 0;
+  overflow: hidden;
 }
 
 /* Rating på billede */
@@ -136,22 +139,41 @@
 /* Billede af brætspil */
 .game-image {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   background: var(--card-background-color);
   transition: var(--transition);
   border-radius: 16px 16px 0 0;
+  display: block;
 }
 
 /* Nedre card */
 .bottom-card {
-  display: flex;
   width: 100%;
-  padding: 4px 8px 8px 8px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border-radius: 0 0 16px 16px;
+  background: var(--card-background-color);
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  background: var(--card-background-color);
-  border-radius: 0 0 16px 16px;
+}
+
+.difficulty-tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #e0e0e0;
+  color: #333;
+  font-family: var(--tag-font-family);
+  font-size: var(--tag-fontsize);
+  padding: 4px 10px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  z-index: 2;
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
 .card-titel {
@@ -187,21 +209,23 @@ body {
   align-items: center;
   background-color: white;
   position: relative;
-  overflow: hidden;
 }
 
 /* Baggrundsbilledet */
 body::before {
   content: "";
-  min-height: 100vh;
-  position: absolute;
-  inset: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-image: url("/img/forsidebaggrund.jpg");
   background-size: cover;
-  background-position: center;
+  background-position:center;
   background-repeat: no-repeat;
   opacity: 0.2;
   z-index: -1;
+  pointer-events: none;
 }
 
 .splash-screen {
@@ -366,11 +390,10 @@ footer {
   width: 100%;
   box-sizing: border-box;
   z-index: 999;
-  cursor: pointer;
 }
 
 .main-content {
-  padding-top: 120px;
+  padding-top: 180px;
   padding-bottom: 80px;
 }
 
@@ -390,6 +413,7 @@ footer {
   border-radius: 20px;
   padding: 8px 30px 8px 12px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 /* Show dropdown on click */
@@ -401,8 +425,8 @@ footer {
 
 /* --- CONTAINER --- */
 main {
-  padding-top: 120px;
-  padding-bottom: 80px;
+  padding-top: 0;
+  position: relative;
 }
 
 /* --- SEKTIONER --- */
@@ -433,7 +457,7 @@ main {
 /* --- ALLE SPIL (grid) --- */
 .game-list-all {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
   padding: 16px;
   justify-items: stretch;
@@ -442,8 +466,12 @@ main {
 
 .top-card img {
   width: 100%;
+  max-width: 180px;   /* or whatever max width you want */
   height: 160px;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  background: #fff;   /* optional: gives a background if image is not full */
 }
 
 /* --- RESPONSIVE --- */
@@ -473,43 +501,52 @@ main {
    ===================== */
 #game-list-all {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(1.5rem, 3vw, 2.5rem);
-  padding: 2rem 0;
+  padding: 10rem 0;
 }
 
 /* ====== DIALOG ====== */
 #game-dialog {
   width: min(800px, 90%);
+  max-height: 90vh;
   border: none;
-  border-radius: var(--radius);
-  background: var(--bg-card);
-  color: var(--text);
+  border-radius: 16px;
+  background: var(--card-background-color);
+  color: var(--description-fontsize-paragraph);
   box-shadow: var(--shadow-lg);
-  padding: 0;
+  padding: 20px;
   overflow: hidden;
   animation: fadeIn 0.3s ease;
 }
 
 #game-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(2, 2, 2, 0.6);
   backdrop-filter: blur(2px);
 }
 
 #dialog-content {
+
   display: flex;
   flex-direction: column;
+  max-height: calc(90vh - 40px);
+  overflow-y:auto; 
+  
 }
 
 #dialog-content img {
   width: 100%;
   height: 350px;
-  object-fit: cover;
+  object-fit: contain;
+  
 }
 
 .dialog-details {
-  padding: 2rem;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .dialog-details h2 {
   font-size: 2rem;
@@ -526,6 +563,37 @@ main {
 .dialog-details .game-description {
   margin-top: 1rem;
   line-height: 1.6;
+}
+
+/*Sværhedgrads knap på Dialog*/
+
+.dialog-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dialog-tags .difficulty-tag {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-family: var(--tag-font-family);
+  font-size: var(--tag-fontsize);
+  font-weight: bold;
+  color: white;
+}
+
+/* Difficulty colors */
+.difficulty-easy {
+  background-color: #4CAF50;  /* Green */
+}
+
+.difficulty-medium {
+  background-color: #FFC107;  /* Yellow */
+  color: #333 !important;     /* Darker text for better contrast on yellow */
+}
+
+.difficulty-hard {
+  background-color: #F44336;  /* Red */
 }
 
 footer {
